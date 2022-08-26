@@ -1,0 +1,4 @@
+#changelog.yaml
+databaseChangeLog:
+  - include:
+      file: 01-create-sample-schema.yaml

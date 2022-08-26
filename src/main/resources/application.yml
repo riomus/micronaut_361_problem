@@ -1,0 +1,31 @@
+micronaut:
+  application:
+    name: demo
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+datasources:
+  default:
+    db-type: postgres
+    schema-generate: NONE
+    maximum-pool-size: 5
+
+r2dbc:
+  datasources:
+    default:
+      options:
+        driver: pool
+        maxSize: 5
+        protocol:
+          postgres
+      schema-generate: NONE
+      db-type: postgres
+
+
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:liquibase-changelog.yaml'

@@ -1,0 +1,44 @@
+<configuration>
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>
+                %cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - MDC: [%X]- %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>tests.log</file>
+        <param name="Append" value="false"/>
+
+        <withJansi>false</withJansi>
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - MDC: [%X]- %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    <!-- Log database SQL queries -->
+    <logger name="io.micronaut.data.query" level="trace"/>
+    <logger name="io.micronaut.data" level="debug"/>
+    <logger name="io.micronaut.transaction" level="trace"/>
+    <logger name="io.micronaut.data.r2dbc" level="trace"/>
+    <logger name="io.r2dbc.postgresql.QUERY" level="debug"/>
+    <!-- Log Kafka -->
+    <logger name="io.micronaut.kafka" level="trace"/>
+    <logger name="org.apache.kafka.clients.producer" level="trace"/>
+
+    <!-- Log HTTP -->
+    <logger name="io.micronaut.http" level="debug"/>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
